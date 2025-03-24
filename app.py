@@ -2,7 +2,6 @@ import os
 import tempfile
 
 import streamlit as st
-
 from utilities.az_login import az_login
 from utilities.chat_with_pdf import ask_ai_with_pdf_context
 from utilities.create_search_index import index_pdf_document
@@ -101,8 +100,11 @@ st.markdown(
     unsafe_allow_html=True,
 )
 
+# Check if the app is running in production
+is_production = os.getenv("ENV") == "production"
+
 # Autenticación Azure (solo una vez al iniciar la app)
-if "azure_logged_in" not in st.session_state:
+if not is_production and "azure_logged_in" not in st.session_state:
     with st.spinner("Autenticando con Azure..."):
         try:
             az_login()
@@ -215,3 +217,6 @@ with right_col:
         st.markdown("</div>", unsafe_allow_html=True)
     else:
         st.info("Por favor sube e indexa al menos un PDF para habilitar el chat.")
+
+if __name__ == "__main__":
+    st.set_option("server.enableCORS", True)
