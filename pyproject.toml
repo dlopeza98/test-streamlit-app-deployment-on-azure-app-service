@@ -1,0 +1,15 @@
+[project]
+name = "test-streamlit-app-deployment-on-azure-app-service"
+version = "0.1.0"
+description = "Default template for PDM package"
+authors = [
+    {name = "dalopeza98", email = "david.lopeza98@gmail.com"},
+]
+dependencies = ["streamlit>=1.43.2"]
+requires-python = "==3.10.*"
+readme = "README.md"
+license = {text = "MIT"}
+
+
+[tool.pdm]
+distribution = false
